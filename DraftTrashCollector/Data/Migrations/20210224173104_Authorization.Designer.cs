@@ -4,14 +4,16 @@ using DraftTrashCollector.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DraftTrashCollector.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210224173104_Authorization")]
+    partial class Authorization
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,32 +50,6 @@ namespace DraftTrashCollector.Data.Migrations
                     b.ToTable("Customer");
                 });
 
-            modelBuilder.Entity("DraftTrashCollector.Models.Employee", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("IdentityUserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Zipcode")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IdentityUserId");
-
-                    b.ToTable("Employee");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -103,15 +79,15 @@ namespace DraftTrashCollector.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "cda714d5-c9ef-435c-9dc0-e1dfca7a330d",
-                            ConcurrencyStamp = "cecf0975-cb4e-4108-b20d-075e8af61ad2",
+                            Id = "0c3019aa-e59d-4a46-bedc-983aa9bed24b",
+                            ConcurrencyStamp = "83dd835f-855a-4f9f-adde-e0c014b9b392",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "b8ae5766-e176-4ef6-bf0f-551d6f4ab5b6",
-                            ConcurrencyStamp = "34ba02f9-966f-4a38-b9f3-7519ef3ddd9a",
+                            Id = "7ef92fe5-8ce3-4181-9f65-87505e75691c",
+                            ConcurrencyStamp = "c2b597ed-5062-4bb8-8a75-49fef24549ce",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         });
@@ -287,13 +263,6 @@ namespace DraftTrashCollector.Data.Migrations
                 });
 
             modelBuilder.Entity("DraftTrashCollector.Models.Customer", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
-                        .WithMany()
-                        .HasForeignKey("IdentityUserId");
-                });
-
-            modelBuilder.Entity("DraftTrashCollector.Models.Employee", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
                         .WithMany()

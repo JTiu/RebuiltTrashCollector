@@ -32,5 +32,6 @@ namespace DraftTrashCollector.Data
             );
         }
         public DbSet<Customer> Customer { get; set; }//#ask is this in the right place?
+        public DbSet<Employee> Employee { get; set; }
     }
 }
