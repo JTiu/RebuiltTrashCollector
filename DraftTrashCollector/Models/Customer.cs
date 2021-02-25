@@ -13,12 +13,18 @@ namespace DraftTrashCollector.Models
     {
         [Key]
         public int Id { get; set; }
-        [DisplayName("Just Things")]
-        public string JustThings { get; set; }
-
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        [DisplayName("Street Address")]
+        public string StreetAddress { get; set; }
+        public double Balance { get; set; }
 
         [DisplayName("P-Up Day")]
-        public int PickUpDay { get; set; }
+        public string PickUpDay { get; set; }
+
+        public DateTime ExtraPickupDay { get; set; }
+
+
         
 
         [ForeignKey("IdentityUser")] /*#ask why throwing error */
