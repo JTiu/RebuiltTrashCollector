@@ -25,14 +25,32 @@ namespace DraftTrashCollector.Controllers
         // GET: CustomerController
         public ActionResult Index()
         {
-            
+
+            //whenever someone registers as a customer or logs in as a customer, they will be routed to this action
+            //they are not a customer object yet if they have just registered, they are just a user
+            //how do we know who this user is?
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            //how can we find out if they exist in the customer table? need to query customer table
+
+            //if they exist in the customer table, what do we want to do?
+            //what if they don't exist in the customer table?
+
+            //these steps might require us routing to other actions or other views
+            //don't want a collection?
+            //Console.WriteLine("went into the index action");
+      
             return View(_context.Customer.ToList());
         }
 
         // GET: CustomerController/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details()
         {
-            Customer personFromDatabase = _context.Customer.Where(customer => customer.Id == id).Single();
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            Customer personFromDatabase = _context.Customer.Where(customer => customer.IdentityUserId == userId).SingleOrDefault();
+            if(personFromDatabase == null)
+            {
+                return RedirectToAction("Create");
+            }
             return View(personFromDatabase);
         }
 

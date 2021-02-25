@@ -22,13 +22,11 @@ namespace DraftTrashCollector.ActionFilters
             {
                 if (_claimsPrincipal.IsInRole("Customer"))
                 {
-                    context.Result = new RedirectToActionResult("Index",
-                    "Customer", null);
+                    context.Result = new RedirectToActionResult("Details", "Customer", null);
                 }
                 else if (_claimsPrincipal.IsInRole("Employee"))
                 {
-                    context.Result = new RedirectToActionResult("Index",
-                    "Employee", null);
+                    context.Result = new RedirectToActionResult("Index", "Employee", null);
                 }
             }
         }

@@ -13,15 +13,18 @@ namespace DraftTrashCollector.Models
     {
         [Key]
         public int Id { get; set; }
+        [DisplayName("First Name")]
         public string FirstName { get; set; }
+        [DisplayName("Last Name")]
         public string LastName { get; set; }
         [DisplayName("Street Address")]
         public string StreetAddress { get; set; }
+        [DisplayName("Balance")]
         public double Balance { get; set; }
 
-        [DisplayName("P-Up Day")]
+        [DisplayName("Pick Up Day")]
         public string PickUpDay { get; set; }
-
+        [DisplayName("Extra Pick Up Day")]
         public DateTime ExtraPickupDay { get; set; }
 
 
