@@ -25,6 +25,7 @@ namespace DraftTrashCollector.Controllers
         // GET: CustomerController
         public ActionResult Index()
         {
+            
             return View(_context.Customer.ToList());
         }
 
@@ -58,6 +59,7 @@ namespace DraftTrashCollector.Controllers
             catch
             {
                 return View();
+                //small change to test github
             }
         }
 
