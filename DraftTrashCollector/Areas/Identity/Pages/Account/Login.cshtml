@@ -2,7 +2,7 @@
 @model LoginModel
 
 @{
-    ViewData["Title"] = "Log in";
+    ViewData["Title"] = "LC & C LogIn";
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -10,7 +10,7 @@
     <div class="col-md-4">
         <section>
             <form id="account" method="post">
-                <h4>Las Cruces Collection Registration.</h4>
+                <h4>Existing LC & C customers: </h4>
                 <hr />
                 <div asp-validation-summary="All" class="text-danger"></div>
                 <div class="form-group">
@@ -39,7 +39,7 @@
                         <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
                     </p>
                     <p>
-                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new Las Cruces Collection user</a>
+                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new Las Cruces Collection & Composting Customer or Employee user</a>
                     </p>
                 </div>
             </form>
@@ -52,11 +52,32 @@
             @{
                 if ((Model.ExternalLogins?.Count ?? 0) == 0)
                 {
-                    <div>
-                        <p>
-                            Las Cruces Collection
-                        </p>
-                    </div>
+                        <div>
+                            <p>
+                                <center>
+                                    Register to join our waste disposal, <br /><center>
+                                    <br>
+                                        compost collection, 
+                                    <br>
+                                     <br>
+                                    and compost utilization services.
+                                    <br>
+                                     <br>
+                                    <br>
+                                    <br>
+                                    Help our community create healthier soil, 
+                                    <br>
+                                     <br>
+                                    cleaner air, 
+                                    <br>
+                                     <br>
+                                    cleaner water,
+                                    <br>
+                                     <br>
+                                        and a more stable climate.<br />
+
+                            </p>
+                        </div>
                 }
                 else
                 {
@@ -73,7 +94,7 @@
                 }
             }
         </section>
-    </div>
+    </div><img src="https://i.pinimg.com/originals/af/2c/78/af2c7831b318e47218dd09b119da9a1d.png" />
 </div>
 
 @section Scripts {
