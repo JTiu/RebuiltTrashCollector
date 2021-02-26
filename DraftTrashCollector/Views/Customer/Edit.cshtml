@@ -4,9 +4,12 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<h2>
+    Existing LC&C customers may update
+    <br>or change any infomation below, including pick-up day. <br> 
+    <br> Our staff will need five business days to implement any change in pick-up.
+</h2>
 
-<h4>Customer</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -28,11 +31,11 @@
                 <input asp-for="StreetAddress" class="form-control" />
                 <span asp-validation-for="StreetAddress" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            @*<div class="form-group">
                 <label asp-for="Balance" class="control-label"></label>
                 <input asp-for="Balance" class="form-control" />
                 <span asp-validation-for="Balance" class="text-danger"></span>
-            </div>
+            </div>*@
             <div class="form-group">
                 <label asp-for="PickUpDay" class="control-label"></label>
                 <input asp-for="PickUpDay" class="form-control" />
@@ -58,7 +61,7 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
-
+<img src="https://www.stjohnromeo.org/uploads/2/2/6/5/22651108/update-contact.jpg?1473217877" />
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
