@@ -38,39 +38,49 @@
     </div>
     <div class="col-md-6 col-md-offset-2">
         <section>
-           <center><h2>Las Cruces Collection & Compost</h2>
-            <hr />
-            @{
-                if ((Model.ExternalLogins?.Count ?? 0) == 0)
-                {
-                    <div>
-                                    <p>
-                                                    <center>Register to join our waste disposal, <br /><center>
-                                                        <br />
-                                                            compost collection, and compost utilization services.<br />
-                                                        <br />
-                                                                Help our community create healthier soil, cleaner air, cleaner water,<br>
-                                                        <br />
-                                                        and a more stable climate.<br />
-                                                    
-</p>
-                    </div>
-                }
-                else
-                {
-                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                        <div>
-                            <p>
-                                @foreach (var provider in Model.ExternalLogins)
+            <center>
+                <h2>Las Cruces Collection & Compost</h2>
+                <center>
+                    <h3>Join here for our waste disposal,</h3>
+                    <br>
+                    <h3>
+                        compost collection,    
+                        <br>
+                        <br>
+                        and compost utilization services.<br />
+                    </h3>
+                    <h3>
+                        <br />
+                        Help our community create <br>
+                        <br>
+                        healthier soil, cleaner air,
+                        <br>
+                        <br>cleaner water,
+                        <br>
+                        <br>
+                        and a more stable climate. <h3>
+                            <br />
+                            <hr />
+                            @{
+                                if ((Model.ExternalLogins?.Count ?? 0) == 0)
                                 {
-                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+
                                 }
-                            </p>
-                        </div>
-                    </form>
-                }
-            }
-        </section>
+                                else
+                                {
+                                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                                        <div>
+                                            <p>
+                                                @foreach (var provider in Model.ExternalLogins)
+                                                {
+                                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                                                }
+                                            </p>
+                                        </div>
+                                    </form>
+                                }
+                            }
+</section>
     </div><img src="https://i.ytimg.com/vi/bVBRMU7HOwA/maxresdefault.jpg" />
 </div>
 
