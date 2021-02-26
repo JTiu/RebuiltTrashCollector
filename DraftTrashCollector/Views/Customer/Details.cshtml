@@ -27,12 +27,12 @@
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.StreetAddress)
-        </dd>
+        @*</dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Balance)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Balance)
+        </dt>*@
+        @*<dd class = "col-sm-10">
+            @Ht*@ml.DisplayFor(model => model.Balance)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.PickUpDay)
@@ -47,14 +47,14 @@
             @Html.DisplayFor(model => model.ExtraPickupDay)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdentityUser)
+            @*@Html.DisplayNameFor(model => model.IdentityUser)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.IdentityUser.Id)
-        </dd>
+        </dd>*@
     </dl>
 </div>
-<div>
+<div><img src="http://image.slideserve.com/718264/benefits-of-composting-l.jpg" />
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>

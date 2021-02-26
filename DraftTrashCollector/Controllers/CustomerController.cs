@@ -39,7 +39,7 @@ namespace DraftTrashCollector.Controllers
             //don't want a collection?
             //Console.WriteLine("went into the index action");
       
-            return View(_context.Customer.ToList());
+            return View(/*_context.Customer.ToList()*/);
         }
 
         // GET: CustomerController/Details/5
