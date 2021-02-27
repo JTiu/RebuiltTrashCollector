@@ -46,7 +46,7 @@ namespace DraftTrashCollector.Controllers
         public ActionResult Details()
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            Customer personFromDatabase = _context.Customer.Where(customer => customer.IdentityUserId == userId).SingleOrDefault();
+            Customer personFromDatabase = _context.Customer.Where(customer => customer.IdentityUserId == userId).FirstOrDefault();
             if(personFromDatabase == null)
             {
                 return RedirectToAction("Create");
@@ -64,15 +64,23 @@ namespace DraftTrashCollector.Controllers
         // POST: CustomerController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Customer Customer)
+        //Once user hits "Create" button - Customer into line 68
+        public ActionResult Create(Customer customer)
         {
             try
             {
+                //Find the ASP Identity User ID
                 var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-                Customer.IdentityUserId = userId;
-                _context.Customer.Add(Customer);
+
+                //Link that ASP Identity User Id to the Customer object that was passed in
+                customer.IdentityUserId = userId;
+
+                //Add user to the database - row is added to the customer table
+                _context.Customer.Add(customer);
                _context.SaveChanges();
-                return RedirectToAction(nameof(Index));
+
+                //Redirect them to desired page (this needs fixing)
+                return RedirectToAction(nameof(Details));
             }
             catch
             {
@@ -84,7 +92,13 @@ namespace DraftTrashCollector.Controllers
         // GET: CustomerController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            //Find user in database 
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            Customer personFromDatabase = _context.Customer.Where(customer => customer.IdentityUserId == userId).FirstOrDefault();
+
+            //Return the view and inject Customer into view 
+            //Does this view accept whatever I am passing in? In order to check - go to .cshtml file and see what model is passed in
+            return View(personFromDatabase);
         }
 
         // POST: CustomerController/Edit/5
@@ -94,10 +108,42 @@ namespace DraftTrashCollector.Controllers
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                //Steps for what we want
+
+                //Step 1 Create a new Customer object and fill out properties from the Form
+                Customer customer = new Customer();
+                customer.FirstName = collection["FirstName"];
+                customer.LastName = collection["LastName"];
+                customer.StreetAddress = collection["StreetAddress"];
+                customer.PickUpDay = collection["PickUpDay"];
+
+                //The form is returning a string date. customer.ExtraPickupDay is a DateTime - we need to convert 
+                //the string date from the form into a DateTime object
+                //Stack overflow where solution was found: https://stackoverflow.com/questions/919244/converting-a-string-to-datetime
+                //Simple explanation: the form is giving you a string - you are turning that string into a DateTime because ExtraPickup day is a DateTime property
+                var formDate = DateTime.Parse(collection["ExtraPickupDay"]);
+                customer.ExtraPickupDay = formDate;
+
+                //This lets the Update method know which customer to Update
+                customer.Id = id;
+
+                //Grab ASP Identity ID and tie it to Customer record we are building
+                customer.IdentityUserId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+                //Step 2: Save Customer object to the database
+                //We want to update the customer information based on ASP Identity user ID
+                _context.Customer.Update(customer);
+                _context.SaveChanges();
+
+                //Step 3: Redirect them to the details page 
+                return RedirectToAction(nameof(Details));
             }
-            catch
+            catch (ArgumentNullException e)
             {
+                Console.WriteLine("An exception ({0}) occurred.",
+                                  e.GetType().Name);
+                Console.WriteLine("Message:\n   {0}\n", e.Message);
+                Console.WriteLine("Stack Trace:\n   {0}\n", e.StackTrace);
                 return View();
             }
         }
