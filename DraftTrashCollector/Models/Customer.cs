@@ -27,8 +27,14 @@ namespace DraftTrashCollector.Models
         [DisplayName("Extra Pick Up Day")]
         public DateTime ExtraPickupDay { get; set; }
 
+        [DisplayName("SuspendStart (dd/mm/yy)")]
+        public string SuspendStart { get; set; }
 
-        
+        [DisplayName("SuspendEnd (dd/mm/yy)")]
+        public string SuspendEnd { get; set; }
+
+
+
 
         [ForeignKey("IdentityUser")] /*#ask why throwing error */
         public string IdentityUserId { get; set; }
