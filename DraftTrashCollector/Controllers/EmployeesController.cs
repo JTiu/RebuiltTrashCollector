@@ -7,12 +7,15 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DraftTrashCollector.Data;
 using DraftTrashCollector.Models;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace DraftTrashCollector.Controllers
 {
+    [Authorize(Roles = "Employee")]
     public class EmployeesController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private ApplicationDbContext _context;
 
         public EmployeesController(ApplicationDbContext context)
         {
@@ -24,6 +27,10 @@ namespace DraftTrashCollector.Controllers
         {
             var applicationDbContext = _context.Employee.Include(e => e.IdentityUser);
             return View(await applicationDbContext.ToListAsync());
+
+            // whenever someone registers as a employee they will be routed to this action
+             
+             //var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
         }
 
         // GET: Employees/Details/5
