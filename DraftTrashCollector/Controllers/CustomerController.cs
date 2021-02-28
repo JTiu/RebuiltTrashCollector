@@ -151,7 +151,13 @@ namespace DraftTrashCollector.Controllers
         // GET: CustomerController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            //Find user in database 
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            Customer personFromDatabase = _context.Customer.Where(customer => customer.IdentityUserId == userId).FirstOrDefault();
+
+            //Return the view and inject Customer into view 
+            //Does this view accept whatever I am passing in? In order to check - go to .cshtml file and see what model is passed in
+            return View(personFromDatabase);
         }
 
         // POST: CustomerController/Delete/5
